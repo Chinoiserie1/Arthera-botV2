@@ -8,16 +8,7 @@ const contractCallWithValue = async (
   deadline: bigint,
   value: bigint
 ) => {
-  console.log("enter contractCallWithValue");
-  // const { request } = await publicClient.simulateContract({
-  //   account,
-  //   address: "0x7ae799fDBE4c330A4AC18d8d65765222A0D47e6D",
-  //   abi: ABI.abi,
-  //   functionName: "swapETHForExactTokens",
-  //   args: [amountOutMin, address, to, deadline],
-  //   value: amountOutMin,
-  // });
-  const hash = await walletClient.writeContract({
+  const { request } = await publicClient.simulateContract({
     account,
     address: "0x7ae799fDBE4c330A4AC18d8d65765222A0D47e6D",
     abi: ABI.abi,
@@ -25,6 +16,7 @@ const contractCallWithValue = async (
     args: [amountOutMin, address, to, deadline],
     value: value,
   });
+  const hash = await walletClient.writeContract(request);
   return hash;
 };
 
